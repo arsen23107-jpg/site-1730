@@ -9,10 +9,10 @@ export default function ProductPage() {
   if (!data) return <div className="container section"><Empty title="Товар не найден" text="Возможно, он больше недоступен." /></div>;
   return (
     <div className="container section pdp">
-      <div className="pdp__gallery">{(data.gallery ?? (data.image ? [data.image] : [])).map(s => <img key={s} src={s} alt={data.title} loading="lazy" />)}</div>
+      <div className="pdp__gallery">{(data.gallery ?? (data.image ? [data.image] : [])).map((s, index) => <img key={s} src={s} alt={data.title} loading={index === 0 ? 'eager' : 'lazy'} />)}</div>
       <div>
         <h1 className="h1">{data.title}</h1>
-        <p className="pdp__price">{data.price} ₽</p>
+        {data.price !== undefined && <p className="pdp__price">{data.price} ₽</p>}
         {data.manufacturer && <p className="muted">{data.manufacturer}</p>}
         {data.description && <p>{data.description}</p>}
         {data.characteristics && <dl className="chars">{Object.entries(data.characteristics).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}

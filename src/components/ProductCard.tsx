@@ -16,7 +16,7 @@ export default function ProductCard({ product: p }: { product: Product }) {
       <div className="pcard__body">
         <span className="muted">{p.category}</span>
         <h3>{p.title}</h3>
-        <div className="pcard__row"><b>{fmt(p.price)}</b>{p.oldPrice && <s className="muted">{fmt(p.oldPrice)}</s>}</div>
+        {p.price !== undefined && <div className="pcard__row"><b>{fmt(p.price)}</b>{p.oldPrice && <s className="muted">{fmt(p.oldPrice)}</s>}</div>}
         <span className={'av av--' + p.availability}>{AV[p.availability]}</span>
       </div>
     </article>
