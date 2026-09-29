@@ -15,10 +15,6 @@ export default function Catalog() {
         <button className={'chip' + (!cat ? ' is-on' : '')} onClick={() => setSp({})}>Все</button>
         {categories.map(c => <button key={c.id} className={'chip' + (cat === c.slug ? ' is-on' : '')} onClick={() => setSp({ category: c.slug })}>{c.title}</button>)}
       </div>
-      <div className="toolbar">
-        <button className="btn btn--ghost" disabled>Фильтры</button>
-        <select className="field" aria-label="Сортировка" disabled><option>Сначала популярные</option></select>
-      </div>
       {loading && <div className="grid">{[0, 1, 2, 3].map(i => <div key={i} className="skeleton" />)}</div>}
       {data && data.length === 0 && <Empty title="Каталог скоро будет доступен" text="Мы готовим ассортимент. Загляните позже." />}
       {data && data.length > 0 && <div className="grid">{data.map(p => <ProductCard key={p.id} product={p} />)}</div>}

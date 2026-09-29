@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logo from '../assets/brand/logo-1730.png';
 const KEY = '1730:age-confirmed';
 export default function AgeGate() {
   const [open, setOpen] = useState(() => localStorage.getItem(KEY) !== 'yes');
@@ -8,7 +9,7 @@ export default function AgeGate() {
     <div className="agegate" role="dialog" aria-modal="true" aria-labelledby="ag-t">
       <div className="agegate__glow" />
       <div className="agegate__box">
-        <span className="logo">1730</span><span className="agegate__label">Возрастное подтверждение</span>
+        <img className="agegate__logo" src={logo} alt="1730" width={2172} height={724} /><span className="agegate__label">Возрастное подтверждение</span>
         <div className="agegate__big" id="ag-t">18+</div>
         <p>{denied ? 'Доступ к информации на сайте ограничен для лиц младше 18 лет.' : 'Сайт содержит информацию о товарах, предназначенных только для совершеннолетних. Подтвердите свой возраст.'}</p>
         <div className="agegate__actions">

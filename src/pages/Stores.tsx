@@ -1,6 +1,7 @@
 import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
 import Empty from '../components/Empty';
+const yandexSearch = (city: string, address: string) => `https://yandex.ru/maps/?mode=search&text=${encodeURIComponent(`${city}, ${address}`)}`;
 export default function Stores() {
   const { data, loading } = useAsync(() => api.getStores());
   return (
@@ -12,12 +13,13 @@ export default function Stores() {
           {data?.length === 0 && <Empty title="Адреса скоро появятся" text="Мы обновляем информацию о магазинах." />}
           {data?.map(s => (
             <article key={s.id} className="store">
-              <h3>{s.city}</h3><p>{s.address}</p><p className="muted">{s.openingHours}</p>
-              <a href={`tel:${s.phone}`}>{s.phone}</a>
+              <p className="store__city">{s.city}</p><h3>{s.address}</h3><p className="muted">{s.openingHours}</p>
+              <a href={`tel:${s.phone}`}>{s.phone}</a>{s.email && <a href={`mailto:${s.email}`}>{s.email}</a>}
+              <a className="store__map-link" href={yandexSearch(s.city, s.address)} target="_blank" rel="noreferrer">Открыть в Яндекс Картах</a>
             </article>
           ))}
         </div>
-        <div className="map" aria-label="Карта магазинов"><span className="logo">1730</span><p className="muted">Карта магазинов</p></div>
+        <aside className="map" aria-label="Карта магазинов"><p className="section-label">Как добраться</p><h2>Выберите удобную точку из списка.</h2><p className="muted">Каждая карточка открывает адрес в Яндекс Картах.</p></aside>
       </div>
     </div>
   );

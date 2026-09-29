@@ -1,2 +1,17 @@
 import type { Store } from '../types';
-export const stores: Store[] = [];
+export const stores: Store[] = [
+  { id: 'barnaul-popova-70d', city: 'Барнаул', address: 'ул. Попова, 70Д (ТЦ Район)', phone: '+7 (999) 323-60-70', email: 'info@vapeshop1730.ru', openingHours: 'Пн–Вс: 09:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-stroiteley-18', city: 'Барнаул', address: 'пр. Строителей, 18 к1 (ТК Локомотив)', phone: '+7 (923) 753-80-49', email: 'kref1999@gmail.com', openingHours: 'Пн–Вс: 09:00–20:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-belinskogo-12', city: 'Барнаул', address: 'р.п. Южный, ул. Белинского, 12', phone: '+7 (929) 323-40-02', email: 'olga.miller.95@bk.ru', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-lenina-102', city: 'Барнаул', address: 'пр. Ленина, 102 (рядом с ТЦ Пионер)', phone: '+7 (929) 326-69-00', email: 'nikita.zajcev.02@mail.ru', openingHours: 'Пн–Вс: 10:00–22:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-kosmonavtov-6v', city: 'Барнаул', address: 'ул. Космонавтов, 6В (ТЦ Алтай)', phone: '+7 (923) 797-61-99', email: 'vip.m1n1mal@mail.ru', openingHours: 'Пн–Вс: 10:00–22:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-antona-petrova-219a', city: 'Барнаул', address: 'ул. Антона Петрова, 219а (ТЦ Ледокол)', phone: '+7 (929) 325-61-99', email: 'vip.m1n1mal@mail.ru', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-popova-150b', city: 'Барнаул', address: 'ул. Попова, 150Б', phone: '+7 (929) 390-60-70', email: 'aakuprienko90@gmail.com', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-pavlovsky-251', city: 'Барнаул', address: 'Павловский тракт, 251 (ТЦ Лето)', phone: '+7 (923) 795-10-99', email: 'kononenkoasa@icloud.com', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-stroiteley-117', city: 'Барнаул', address: 'пр. Строителей, 117 (ТЦ Галактика)', phone: '+7 (933) 160-80-02', email: 'nikola26465@gmail.com', openingHours: 'Пн–Вс: 10:00–22:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-lenina-191', city: 'Барнаул', address: 'пр. Ленина, 191', phone: '+7 (929) 376-69-00', email: 'nikita.zajcev.02@mail.ru', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-baltiyskaya-38', city: 'Барнаул', address: 'ул. Балтийская, 38', phone: '+7 (933) 161-10-99', email: 'kononenkoasa@icloud.com', openingHours: 'Пн–Вс: 10:00–22:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'barnaul-baltiyskaya-103', city: 'Барнаул', address: 'ул. Балтийская, 103', phone: '+7 (999) 323-60-70', email: 'aakuprienko90@gmail.com', openingHours: 'Круглосуточно', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'novoaltaysk-oktyabrskaya-17', city: 'Новоалтайск', address: 'ул. Октябрьская, 17', phone: '+7 (929) 348-40-02', email: 'olga.miller.95@bk.ru', openingHours: 'Пн–Вс: 09:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+  { id: 'novoaltaysk-kosmonavtov-11', city: 'Новоалтайск', address: 'ул. Космонавтов, 11', phone: '+7 (933) 932-40-02', email: 'olga.miller.95@bk.ru', openingHours: 'Пн–Вс: 10:00–21:00', paymentMethods: ['Visa', 'Mastercard', 'МИР', 'Наличные'] },
+];
