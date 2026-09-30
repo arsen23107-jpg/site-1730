@@ -1,8 +1,8 @@
 import Icon from './Icon';
-import xros from '../assets/products/vaporesso-xros-3-mini-lilac-purple.png';
-import oxva from '../assets/products/oxva-xlim-pro-2-dna-frost-titanium-blue.png';
-import bless from '../assets/products/bless-strawberry-pomelo.png';
-import waka from '../assets/products/waka-10000-mango-peach.png';
+import xros from '../assets/products/vaporesso-xros-3-mini-lilac-purple.jpg';
+import oxva from '../assets/products/oxva-xlim-pro-2-dna-frost-titanium-blue.jpg';
+import bless from '../assets/products/bless-strawberry-pomelo.jpg';
+import waka from '../assets/products/waka-10000-mango-peach.jpg';
 
 const posts = [
   ['Новости 1730', 'Подборка актуальных устройств и ароматов уже в магазинах сети.', xros],

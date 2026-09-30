@@ -5,7 +5,7 @@ import PromoBanners from '../components/PromoBanners';
 import VkFeed from '../components/VkFeed';
 import Icon from '../components/Icon';
 import { useReveal } from '../hooks/useReveal';
-import storeInterior from '../assets/about/store-interior.png';
+import storeInterior from '../assets/about/store-interior.jpg';
 const signals = [['Каталог', 'Актуальный ассортимент по категориям', 'grid'], ['Наличие', 'Проверяйте товар в магазинах сети', 'pin'], ['Избранное', 'Сохраняйте то, к чему хотите вернуться', 'heart']];
 export default function Home() {
   useReveal();

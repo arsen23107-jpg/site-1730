@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../assets/brand/logo-1730.png';
+import logo from '../assets/brand/logo-1730-small.png';
 const KEY = '1730:age-confirmed';
 export default function AgeGate() {
   const [open, setOpen] = useState(() => localStorage.getItem(KEY) !== 'yes');

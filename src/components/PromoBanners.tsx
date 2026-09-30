@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Icon from './Icon';
-import telegramWide from '../assets/banners/telegram-wide.png';
-import telegramMobile from '../assets/banners/telegram-mobile.png';
-import vkWide from '../assets/banners/vk-wide.png';
-import vkMobile from '../assets/banners/vk-mobile.png';
+import telegramWide from '../assets/banners/telegram-wide.jpg';
+import telegramMobile from '../assets/banners/telegram-mobile.jpg';
+import vkWide from '../assets/banners/vk-wide.jpg';
+import vkMobile from '../assets/banners/vk-mobile.jpg';
 
 const banners = [
   { name: 'Telegram 1730', href: 'https://t.me/+lL9we5w3V9xjMzNi', wide: telegramWide, mobile: telegramMobile },

@@ -1,10 +1,10 @@
 import type { Product } from '../types';
-import vaporessoXros3Mini from '../assets/products/vaporesso-xros-3-mini-lilac-purple.png';
-import oxvaXlimPro2Dna from '../assets/products/oxva-xlim-pro-2-dna-frost-titanium-blue.png';
-import vox10000 from '../assets/products/vox-10000-fruit-crush.png';
-import waka10000 from '../assets/products/waka-10000-mango-peach.png';
-import pickMeMandarin from '../assets/products/pick-me-mandarin.png';
-import blessStrawberryPomelo from '../assets/products/bless-strawberry-pomelo.png';
+import vaporessoXros3Mini from '../assets/products/vaporesso-xros-3-mini-lilac-purple.jpg';
+import oxvaXlimPro2Dna from '../assets/products/oxva-xlim-pro-2-dna-frost-titanium-blue.jpg';
+import vox10000 from '../assets/products/vox-10000-fruit-crush.jpg';
+import waka10000 from '../assets/products/waka-10000-mango-peach.jpg';
+import pickMeMandarin from '../assets/products/pick-me-mandarin.jpg';
+import blessStrawberryPomelo from '../assets/products/bless-strawberry-pomelo.jpg';
 
 export const products: Product[] = [
   { id: 'vaporesso-xros-3-mini-lilac-purple', title: 'Vaporesso Xros 3 Mini — Lilac Purple', category: 'pod', price: 1270, availability: 'low', availabilityCount: 1, image: vaporessoXros3Mini, manufacturer: 'Vaporesso', stockByStore: { 'barnaul-baltiyskaya-103': 1 }, characteristics: { 'Максимальная мощность': '23 Вт', 'Совместимые картриджи': 'Vaporesso Xros 0.6 / 0.7 / 0.8 / 1.0 / 1.2 Ом' } },

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Icon from './Icon';
-import logo from '../assets/brand/logo-1730.png';
+import logo from '../assets/brand/logo-1730-small.png';
 import { stores } from '../data/stores';
 const nav = [['/catalog', 'Каталог'], ['/stores', 'Магазины'], ['/contacts', 'Контакты']];
 export default function Header({ onSearch, onAuth }: { onSearch: () => void; onAuth: () => void }) {
