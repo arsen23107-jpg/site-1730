@@ -6,6 +6,7 @@ import Product from './pages/Product';
 import Stores from './pages/Stores';
 import Favorites from './pages/Favorites';
 import Contacts from './pages/Contacts';
+import About from './pages/About';
 export default function App() {
   return (
     <Routes>
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="stores" element={<Stores />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="contacts" element={<Contacts />} />
+        <Route path="about" element={<About />} />
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

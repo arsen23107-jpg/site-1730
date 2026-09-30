@@ -10,6 +10,7 @@ const P: Record<string, string> = {
   arrow: 'M5 12h14M13 6l6 6-6 6',
   chevron: 'M9 18l6-6-6-6',
   phone: 'M6.6 3.8l2.2-.5 1.7 4-1.6 1.4a15 15 0 006.8 6.8l1.4-1.6 4 1.7-.5 2.2a2 2 0 01-2 1.5C10.4 19 5 13.6 5.1 5.8a2 2 0 011.5-2z',
+  vk: 'M4 7.5c0-2.1 1.4-3.5 3.5-3.5h9c2.1 0 3.5 1.4 3.5 3.5v9c0 2.1-1.4 3.5-3.5 3.5h-9C5.4 20 4 18.6 4 16.5zM7 9.5c.1 3.1 1.5 5 3.9 5h.2v-1.8c1.1.1 2 .9 2.3 1.8H15c-.4-1.4-1.4-2.2-2-2.5.6-.4 1.5-1.1 1.7-2.5h-1.5c-.3 1.1-1.1 1.9-2.1 2V9.5h-1.4v3.5c-1.1-.3-1.5-1.8-1.6-3.5z',
 };
 export default function Icon({ name, size = 22, fill = false }: { name: string; size?: number; fill?: boolean }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill={fill ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={P[name]} /></svg>;

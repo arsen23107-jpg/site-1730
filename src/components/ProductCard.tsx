@@ -19,7 +19,7 @@ export default function ProductCard({ product: p }: { product: Product }) {
         <span className="muted">{category}</span>
         <h3>{p.title}</h3>
         {p.price !== undefined ? <div className="pcard__row"><b>{fmt(p.price)}</b>{p.oldPrice && <s className="muted">{fmt(p.oldPrice)}</s>}</div> : <span className="muted">Цена уточняется</span>}
-        <span className={'av av--' + p.availability}>{p.availabilityCount === undefined ? AV[p.availability] : `Есть в наличии: ${p.availabilityCount}`}</span>
+        <span className={'av av--' + p.availability}>{p.availabilityCount === undefined ? AV[p.availability] : `Есть в наличии: ${p.availabilityCount}`}{p.stockByStore && ` · ${Object.keys(p.stockByStore).length} ${Object.keys(p.stockByStore).length === 1 ? 'магазин' : 'магазинах'}`}</span>
       </div>
     </article>
   );

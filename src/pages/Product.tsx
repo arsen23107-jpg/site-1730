@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
 import Empty from '../components/Empty';
+import { stores } from '../data/stores';
+const mapSearch = (city: string, address: string) => `https://yandex.ru/maps/?mode=search&text=${encodeURIComponent(`${city}, ${address}`)}`;
 export default function ProductPage() {
   const { id = '' } = useParams();
   const { data, loading } = useAsync(() => api.getProduct(id), [id]);
@@ -17,6 +19,7 @@ export default function ProductPage() {
         {data.manufacturer && <p className="muted">{data.manufacturer}</p>}
         {data.description && <p>{data.description}</p>}
         {data.characteristics && <dl className="chars">{Object.entries(data.characteristics).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
+        <section className="product-stock"><p className="section-label">Наличие в магазинах</p>{data.stockByStore ? <div className="product-stock__list">{Object.entries(data.stockByStore).map(([storeId, count]) => { const store = stores.find(item => item.id === storeId); return store && <a key={storeId} href={mapSearch(store.city, store.address)} target="_blank" rel="noreferrer"><span><b>{store.city}</b>{store.address}</span><strong>{count} шт.</strong></a>; })}</div> : <p className="muted">Количество по отдельным магазинам уточняется. Общий остаток указан выше.</p>}</section>
       </div>
     </div>
   );

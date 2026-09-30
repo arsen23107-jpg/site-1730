@@ -1,6 +1,7 @@
 import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
 import Empty from '../components/Empty';
+import MapEmbed from '../components/MapEmbed';
 const yandexSearch = (city: string, address: string) => `https://yandex.ru/maps/?mode=search&text=${encodeURIComponent(`${city}, ${address}`)}`;
 export default function Stores() {
   const { data, loading } = useAsync(() => api.getStores());
@@ -19,7 +20,7 @@ export default function Stores() {
             </article>
           ))}
         </div>
-        <aside className="map" aria-label="Карта магазинов"><p className="section-label">Как добраться</p><h2>Выберите удобную точку из списка.</h2><p className="muted">Каждая карточка открывает адрес в Яндекс Картах.</p></aside>
+        <aside className="map" aria-label="Карта магазинов"><MapEmbed /></aside>
       </div>
     </div>
   );
