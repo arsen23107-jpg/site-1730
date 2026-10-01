@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { type CSSProperties, type RefCallback, useState } from 'react';
 import Modal from './Modal';
 import Icon from './Icon';
 import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
 import { Link } from 'react-router-dom';
-export default function SearchOverlay({ onClose }: { onClose: () => void }) {
+import { type MorphPhase } from '../motion/softMorph';
+export default function SearchOverlay({ onClose, phase, originStyle, surfaceRef }: { onClose: () => void; phase: MorphPhase; originStyle: CSSProperties; surfaceRef: RefCallback<HTMLDivElement> }) {
   const [q, setQ] = useState('');
   const { data } = useAsync(() => (q.trim() ? api.getProducts(undefined, q) : Promise.resolve([])), [q]);
   return (
-    <Modal title="Поиск" onClose={onClose} full>
+    <Modal title="Поиск" onClose={onClose} phase={phase} originStyle={originStyle} surfaceRef={surfaceRef} full>
       <label className="search"><Icon name="search" /><input autoFocus value={q} onChange={e => setQ(e.target.value)} placeholder="Поиск по каталогу" aria-label="Поиск по каталогу" /></label>
       <div className="search__res">
         {!q.trim() && <p className="muted">Начните вводить название товара</p>}

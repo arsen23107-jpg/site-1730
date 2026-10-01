@@ -82,3 +82,23 @@
 
 /* First-visit video intro. The application is already mounted underneath this layer. */
 .site-intro{position:fixed;inset:0;z-index:250;overflow:hidden;background:#000;opacity:1;transition:opacity .25s ease;pointer-events:none}.site-intro--leaving{opacity:0}.site-intro__video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+
+/* One shared soft-morph language for every disclosure and view transition. */
+:root{--morph-trigger-x:50vw;--morph-trigger-y:50vh;--morph-origin-x:50%;--morph-origin-y:50%;--morph-dx:0px;--morph-dy:0px}
+.soft-morph-page{animation:soft-page-in .32s cubic-bezier(.18,.82,.2,1);transform-origin:var(--morph-trigger-x) var(--morph-trigger-y)}
+.soft-morph-content{animation:soft-content-in .28s cubic-bezier(.2,.8,.2,1)}
+.soft-morph{will-change:transform,opacity,filter;transform-origin:var(--morph-origin-x) var(--morph-origin-y)}
+.soft-morph--opening{animation:soft-surface-in .26s cubic-bezier(.18,.82,.2,1) both}
+.soft-morph--closing{animation:soft-surface-out .24s cubic-bezier(.55,0,.75,.2) both;pointer-events:none}
+.modal.soft-morph{animation:soft-veil-in .2s ease both}.modal.soft-morph--closing{animation:soft-veil-out .24s ease both}
+.modal.soft-morph .modal__box{transform-origin:var(--morph-origin-x) var(--morph-origin-y);will-change:transform,opacity,filter}.modal.soft-morph--opening .modal__box{animation:soft-window-in .3s cubic-bezier(.18,.82,.2,1) both}.modal.soft-morph--closing .modal__box{animation:soft-window-out .24s cubic-bezier(.55,0,.75,.2) both}
+.agegate.soft-morph--opening .agegate__box{animation:soft-window-in .3s cubic-bezier(.18,.82,.2,1) both}.agegate.soft-morph--closing .agegate__box{animation:soft-window-out .24s cubic-bezier(.55,0,.75,.2) both}
+.motion-ready button,.motion-ready a{transition-property:transform,opacity,background,border-color,color,box-shadow;transition-duration:.18s;transition-timing-function:cubic-bezier(.2,.76,.2,1)}.motion-ready button:active,.motion-ready a:active{transform:scale(.975)}
+@keyframes soft-page-in{from{opacity:0;filter:blur(9px);transform:translate3d(0,10px,0) scale(.99)}55%{opacity:1;filter:blur(1.5px);transform:translate3d(0,0,0) scale(1.004)}to{opacity:1;filter:none;transform:none}}
+@keyframes soft-content-in{from{opacity:0;filter:blur(7px);transform:translate3d(0,8px,0) scale(.985)}to{opacity:1;filter:none;transform:none}}
+@keyframes soft-veil-in{from{background:rgba(0,0,0,0);backdrop-filter:blur(0)}to{background:rgba(0,0,0,.7);backdrop-filter:blur(8px)}}@keyframes soft-veil-out{to{background:rgba(0,0,0,0);backdrop-filter:blur(0)}}
+@keyframes soft-surface-in{0%{opacity:0;filter:blur(12px);transform:translate3d(var(--morph-dx),var(--morph-dy),0) scale(.13,.1)}52%{opacity:1;filter:blur(1px);transform:translate3d(0,0,0) scale(1.018,.985)}100%{opacity:1;filter:none;transform:none}}
+@keyframes soft-surface-out{0%{opacity:1;filter:none;transform:none}42%{opacity:1;filter:blur(1px);transform:scale(.985,1.012)}100%{opacity:0;filter:blur(12px);transform:translate3d(var(--morph-dx),var(--morph-dy),0) scale(.13,.1)}}
+@keyframes soft-window-in{0%{opacity:0;filter:blur(14px);transform:translate3d(var(--morph-dx),var(--morph-dy),0) scale(.1,.08);border-radius:50%}57%{opacity:1;filter:blur(1px);transform:translate3d(0,0,0) scale(1.02,.985)}100%{opacity:1;filter:none;transform:none}}
+@keyframes soft-window-out{0%{opacity:1;filter:none;transform:none}45%{opacity:1;filter:blur(1px);transform:scale(.985,1.015)}100%{opacity:0;filter:blur(14px);transform:translate3d(var(--morph-dx),var(--morph-dy),0) scale(.1,.08);border-radius:50%}}
+@media(prefers-reduced-motion:reduce){.soft-morph-page,.soft-morph-content,.soft-morph--opening,.soft-morph--closing,.modal.soft-morph,.modal.soft-morph--closing,.modal.soft-morph .modal__box,.agegate.soft-morph .agegate__box{animation:none!important}.motion-ready button:active,.motion-ready a:active{transform:none}}
