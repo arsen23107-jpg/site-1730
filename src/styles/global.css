@@ -69,4 +69,5 @@
   .vk-post{min-height:0}.vk-post p{min-height:0;height:58px;overflow:hidden;margin:8px 0}.vk-post img{height:auto;aspect-ratio:1/1;object-fit:cover}
   .map-loader.map-preview{min-height:285px}.map-loader.map-preview .yandex-map{height:285px}.stores-preview__list{max-height:260px}.stores-preview__list a{min-height:66px}
   .map .map-loader{min-height:370px}.map .yandex-map{height:370px}
+  .scroll-top{z-index:70;right:16px;bottom:calc(92px + env(safe-area-inset-bottom))}
 }

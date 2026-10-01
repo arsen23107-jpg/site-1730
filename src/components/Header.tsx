@@ -51,14 +51,20 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
   const scheduleMenuClose = () => {
     menuCloseTimer.current = window.setTimeout(() => setMenu(false), 240);
   };
+  const openMenuOnHover = () => {
+    if (window.matchMedia('(hover: hover)').matches) openMenu();
+  };
+  const closeMenuOnHover = () => {
+    if (window.matchMedia('(hover: hover)').matches) scheduleMenuClose();
+  };
 
   return <>
     <header className={'header' + (scrolled ? ' header--scrolled' : '') + (menu ? ' header--menu' : '')}>
       <div className="container header__in">
         <div className="header__menu-wrap">
           {pathname !== '/' && <button className="header__back iconbtn" aria-label="Назад" onClick={goBack}><Icon name="arrow" /></button>}
-          <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onMouseEnter={openMenu} onMouseLeave={scheduleMenuClose} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
-          <div className="header__side-menu" aria-hidden={!menu} onMouseEnter={openMenu} onMouseLeave={scheduleMenuClose}>
+          <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onMouseEnter={openMenuOnHover} onMouseLeave={closeMenuOnHover} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
+          <div className="header__side-menu" aria-hidden={!menu} onMouseEnter={openMenuOnHover} onMouseLeave={closeMenuOnHover}>
             <nav className="container" aria-label="Меню сайта">
               {links.map(([to, label]) => <NavLink key={to} to={to} onClick={closeMenu}>{label}<Icon name="arrow" /></NavLink>)}
               <a href="https://vk.ru/vape1730" target="_blank" rel="noreferrer">Мы ВКонтакте<Icon name="arrow" /></a>
