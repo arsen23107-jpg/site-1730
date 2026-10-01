@@ -22,7 +22,7 @@ export default function SiteIntro() {
     if (finishTimer.current) window.clearTimeout(finishTimer.current);
     if (fallbackTimer.current) window.clearTimeout(fallbackTimer.current);
     setPhase('leaving');
-    window.setTimeout(() => setPhase('hidden'), 650);
+    window.setTimeout(() => setPhase('hidden'), 250);
   }, [phase]);
 
   useEffect(() => {
