@@ -3,7 +3,7 @@ import Modal from './Modal';
 import Icon from './Icon';
 import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
-import ProductCard from './ProductCard';
+import { Link } from 'react-router-dom';
 export default function SearchOverlay({ onClose }: { onClose: () => void }) {
   const [q, setQ] = useState('');
   const { data } = useAsync(() => (q.trim() ? api.getProducts(undefined, q) : Promise.resolve([])), [q]);
@@ -13,7 +13,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
       <div className="search__res">
         {!q.trim() && <p className="muted">Начните вводить название товара</p>}
         {q.trim() && data && data.length === 0 && <p className="muted">Ничего не найдено по запросу «{q}»</p>}
-        <div className="grid">{data?.map(p => <ProductCard key={p.id} product={p} />)}</div>
+        <div className="search__results">{data?.map(p => <Link key={p.id} to={`/product/${p.id}`} onClick={onClose} className="search-result"><img src={p.image} alt="" width={96} height={96} /><span><b>{p.title}</b><small>{p.price === undefined ? 'Цена уточняется' : `${new Intl.NumberFormat('ru-RU').format(p.price)} ₽`}</small><em>{p.availabilityCount === undefined ? 'Наличие уточняется' : `Есть в наличии: ${p.availabilityCount}`}</em></span></Link>)}</div>
       </div>
     </Modal>
   );

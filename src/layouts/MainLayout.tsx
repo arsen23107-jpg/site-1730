@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import SearchOverlay from '../components/SearchOverlay';
 import ErrorBoundary from '../components/ErrorBoundary';
 import AuthModal from '../components/AuthModal';
+import PageControls from '../components/PageControls';
 export default function MainLayout() {
   const [search, setSearch] = useState(false);
   const [auth, setAuth] = useState(false);
@@ -19,6 +20,7 @@ export default function MainLayout() {
       <AgeGate />
       <Header onSearch={() => setSearch(true)} onAuth={() => setAuth(true)} />
       <main key={pathname} className="page"><ErrorBoundary><Outlet /></ErrorBoundary></main>
+      {pathname !== '/' && <PageControls />}
       <Footer />
       <BottomNav />
       {search && <SearchOverlay onClose={() => setSearch(false)} />}

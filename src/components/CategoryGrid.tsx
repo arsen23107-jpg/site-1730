@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
-import podCover from '../assets/categories/pod-systems.jpg';
-import disposableCover from '../assets/categories/disposable-devices.jpg';
-import liquidsCover from '../assets/categories/e-liquids.jpg';
-const cards = [{ title: 'POD-системы', label: 'Компактные устройства', kind: 'pod', image: podCover }, { title: 'Одноразовые\nустройства', label: 'Готовые решения', kind: 'disposable', image: disposableCover }, { title: 'Жидкости', label: 'Ароматы для устройств', kind: 'liquids', image: liquidsCover }];
-export default function CategoryGrid() { return <section className="container home-section categories" data-reveal><div className="section-heading"><div><p className="section-label">Направления</p><h2>Начните с категории</h2></div><Link to="/catalog" className="text-action">Весь каталог <Icon name="arrow" size={17} /></Link></div><div className="category-grid">{cards.map((card, index) => <Link key={card.kind} to={`/catalog?category=${card.kind}`} className={`category-card category-card--${card.kind}`}><img src={card.image} alt="" loading="lazy" width={1122} height={1402} /><span className="category-card__number">0{index + 1}</span><div><h3>{card.title.split('\n').map((line, i) => <span key={line}>{line}{i === 0 && <br />}</span>)}</h3><p>{card.label}</p></div><span className="category-card__go"><Icon name="arrow" size={18} /></span></Link>)}</div></section>; }
+import vape from '../assets/popular/vape.jpg';
+import disposable from '../assets/popular/disposable.jpg';
+import liquids from '../assets/popular/liquids.jpg';
+
+const cards = [
+  { title: 'Вейп', kind: 'pod', image: vape },
+  { title: 'Одноразовые устройства', kind: 'disposable', image: disposable },
+  { title: 'Жидкости', kind: 'liquids', image: liquids },
+];
+
+export default function CategoryGrid() {
+  return <section className="container popular" data-reveal><div className="section-heading"><div><p className="section-label">Каталог 1730</p><h2>Популярно у нас</h2></div><Link to="/catalog" className="text-action">Весь каталог <Icon name="arrow" size={17} /></Link></div><div className="popular__grid">{cards.map(card => <Link key={card.kind} to={`/catalog?category=${card.kind}`} className="popular__card"><img src={card.image} alt="" loading="lazy" width={560} height={746} /><span>{card.title}</span><Icon name="arrow" size={16} /></Link>)}</div></section>;
+}
