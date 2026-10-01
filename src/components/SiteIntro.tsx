@@ -28,7 +28,7 @@ export default function SiteIntro() {
   useEffect(() => {
     if (phase !== 'visible') return;
     if (!forcePreview) sessionStorage.setItem(SESSION_KEY, 'yes');
-    fallbackTimer.current = window.setTimeout(finish, 1600);
+    fallbackTimer.current = window.setTimeout(finish, 4500);
     return () => { if (fallbackTimer.current) window.clearTimeout(fallbackTimer.current); };
   }, [finish, forcePreview, phase]);
 
@@ -45,6 +45,6 @@ export default function SiteIntro() {
 
   if (phase === 'hidden') return null;
   return <div className={'site-intro' + (phase === 'leaving' ? ' site-intro--leaving' : '')} aria-hidden="true">
-    <video ref={videoRef} className="site-intro__video" src={isMobile ? mobileVideo : desktopVideo} autoPlay muted playsInline preload="auto" onCanPlay={canPlay} onPlaying={start} onEnded={finish} onError={finish} />
+    <video ref={videoRef} className="site-intro__video" src={isMobile ? mobileVideo : desktopVideo} autoPlay muted playsInline preload="auto" onLoadedData={canPlay} onCanPlay={canPlay} onPlaying={start} onEnded={finish} onError={finish} />
   </div>;
 }
