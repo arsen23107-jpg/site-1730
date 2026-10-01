@@ -36,7 +36,7 @@ export default function SiteIntro() {
     if (started.current) return;
     started.current = true;
     if (fallbackTimer.current) window.clearTimeout(fallbackTimer.current);
-    finishTimer.current = window.setTimeout(finish, 4000);
+    finishTimer.current = window.setTimeout(finish, isMobile ? 1350 : 4000);
   };
 
   const canPlay = () => {
