@@ -8,6 +8,7 @@ import SearchOverlay from '../components/SearchOverlay';
 import ErrorBoundary from '../components/ErrorBoundary';
 import AuthModal from '../components/AuthModal';
 import PageControls from '../components/PageControls';
+import ScrollTop from '../components/ScrollTop';
 export default function MainLayout() {
   const [search, setSearch] = useState(false);
   const [auth, setAuth] = useState(false);
@@ -23,6 +24,7 @@ export default function MainLayout() {
       {pathname !== '/' && <PageControls />}
       <Footer />
       <BottomNav />
+      <ScrollTop />
       {search && <SearchOverlay onClose={() => setSearch(false)} />}
       {auth && <AuthModal onClose={() => setAuth(false)} />}
     </>
