@@ -6,9 +6,10 @@ const SESSION_KEY = '1730:intro-seen';
 type Phase = 'visible' | 'leaving' | 'hidden';
 
 export default function SiteIntro() {
+  const forcePreview = new URLSearchParams(window.location.search).get('intro') === 'preview';
   const [phase, setPhase] = useState<Phase>(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    return reducedMotion || sessionStorage.getItem(SESSION_KEY) === 'yes' ? 'hidden' : 'visible';
+    return reducedMotion || (!forcePreview && sessionStorage.getItem(SESSION_KEY) === 'yes') ? 'hidden' : 'visible';
   });
   const [isMobile] = useState(() => window.matchMedia('(max-width: 820px)').matches);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -26,10 +27,10 @@ export default function SiteIntro() {
 
   useEffect(() => {
     if (phase !== 'visible') return;
-    sessionStorage.setItem(SESSION_KEY, 'yes');
+    if (!forcePreview) sessionStorage.setItem(SESSION_KEY, 'yes');
     fallbackTimer.current = window.setTimeout(finish, 1600);
     return () => { if (fallbackTimer.current) window.clearTimeout(fallbackTimer.current); };
-  }, [finish, phase]);
+  }, [finish, forcePreview, phase]);
 
   const start = () => {
     if (started.current) return;
