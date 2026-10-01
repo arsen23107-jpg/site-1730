@@ -3,17 +3,20 @@ import { api } from '../services/api';
 import { useAsync } from '../hooks/useAsync';
 import Empty from '../components/Empty';
 import { stores } from '../data/stores';
+import Icon from '../components/Icon';
+import { useFavorites } from '../hooks/useFavorites';
 const mapSearch = (city: string, address: string) => `https://yandex.ru/maps/?mode=search&text=${encodeURIComponent(`${city}, ${address}`)}`;
 export default function ProductPage() {
   const { id = '' } = useParams();
   const { data, loading } = useAsync(() => api.getProduct(id), [id]);
+  const { has, toggle } = useFavorites();
   if (loading) return <div className="container section"><div className="skeleton" /></div>;
   if (!data) return <div className="container section"><Empty title="Товар не найден" text="Возможно, он больше недоступен." /></div>;
   return (
     <div className="container section pdp">
       <div className="pdp__gallery">{(data.gallery ?? (data.image ? [data.image] : [])).map((s, index) => <img key={s} src={s} alt={data.title} loading={index === 0 ? 'eager' : 'lazy'} />)}</div>
-      <div>
-        <h1 className="h1">{data.title}</h1>
+      <div className="pdp__info">
+        <div className="pdp__title-row"><h1 className="h1">{data.title}</h1><button className={'pdp__fav' + (has(data.id) ? ' is-on' : '')} aria-pressed={has(data.id)} aria-label={has(data.id) ? 'Убрать из избранного' : 'Добавить в избранное'} onClick={() => toggle(data.id)}><Icon name="heart" fill={has(data.id)} /></button></div>
         {data.price !== undefined ? <p className="pdp__price">{new Intl.NumberFormat('ru-RU').format(data.price)} ₽</p> : <p className="pdp__price pdp__price--pending">Цена уточняется</p>}
         <p className={'av av--' + data.availability}>{data.availabilityCount === undefined ? 'Наличие уточняется' : `Есть в наличии: ${data.availabilityCount}`}</p>
         {data.manufacturer && <p className="muted">{data.manufacturer}</p>}
