@@ -16,6 +16,7 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
   const [city, setCity] = useState('Барнаул');
   const phoneRef = useRef<HTMLDivElement>(null);
   const phoneCloseTimer = useRef<number | null>(null);
+  const menuCloseTimer = useRef<number | null>(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -43,14 +44,21 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
     if (window.history.length > 1) navigate(-1);
     else navigate('/');
   };
+  const openMenu = () => {
+    if (menuCloseTimer.current) window.clearTimeout(menuCloseTimer.current);
+    setMenu(true);
+  };
+  const scheduleMenuClose = () => {
+    menuCloseTimer.current = window.setTimeout(() => setMenu(false), 240);
+  };
 
   return <>
     <header className={'header' + (scrolled ? ' header--scrolled' : '') + (menu ? ' header--menu' : '')}>
       <div className="container header__in">
-        <div className="header__menu-wrap" onMouseEnter={() => setMenu(true)} onMouseLeave={() => setMenu(false)}>
+        <div className="header__menu-wrap">
           {pathname !== '/' && <button className="header__back iconbtn" aria-label="Назад" onClick={goBack}><Icon name="arrow" /></button>}
-          <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
-          <div className="header__side-menu" aria-hidden={!menu}>
+          <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onMouseEnter={openMenu} onMouseLeave={scheduleMenuClose} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
+          <div className="header__side-menu" aria-hidden={!menu} onMouseEnter={openMenu} onMouseLeave={scheduleMenuClose}>
             <nav className="container" aria-label="Меню сайта">
               {links.map(([to, label]) => <NavLink key={to} to={to} onClick={closeMenu}>{label}<Icon name="arrow" /></NavLink>)}
               <a href="https://vk.ru/vape1730" target="_blank" rel="noreferrer">Мы ВКонтакте<Icon name="arrow" /></a>

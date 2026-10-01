@@ -56,7 +56,7 @@
 .header__menu-wrap{position:static;display:flex;align-items:center;gap:2px}.header__back svg{transform:rotate(180deg)}
 .header__side-menu{overscroll-behavior:contain}.header__side-menu nav{max-height:calc(100vh - 142px);overflow-y:auto;padding-bottom:8px}
 .header__phone-menu{max-height:min(70vh,430px);overflow-y:auto;overscroll-behavior:contain}
-.promos .promo img{height:min(36vw,500px);max-height:none;object-fit:contain;background:#08080a}
+.promos .promo img{height:min(34vw,480px);max-height:none;object-fit:cover;background:#08080a}
 .popular__card{background:#0b0b0d}.popular__card img{object-fit:contain!important;object-position:center;transform:none!important}.popular__card:hover img{transform:scale(1.025)!important}
 .vk-post{min-height:0;padding:16px}.vk-post p{min-height:0;margin:10px 0 12px}.vk-post img{height:auto;aspect-ratio:1.45/1;margin-top:0;object-fit:cover}.vk-post__meta{flex:none}
 .map-loader.map-preview{min-height:390px;padding:0!important;display:block;background:#121216}.map-loader.map-preview:before,.map-loader.map-preview:after{pointer-events:none;display:none}.map-loader.map-preview .yandex-map{width:100%;height:390px;min-height:0}.stores-preview__list a small{color:var(--accent-hot);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.stores-preview__list a{gap:4px}.stores-preview__layout{background:#121216}
