@@ -15,6 +15,7 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
   const phoneSheet = useSoftMorph();
   const [allPhones, setAllPhones] = useState(false);
   const [city, setCity] = useState('Барнаул');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => localStorage.getItem('1730:theme') === 'light' ? 'light' : 'dark');
   const phoneRef = useRef<HTMLDivElement>(null);
   const phoneCloseTimer = useRef<number | null>(null);
   const menuCloseTimer = useRef<number | null>(null);
@@ -26,6 +27,10 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
     update(); addEventListener('scroll', update, { passive: true });
     return () => removeEventListener('scroll', update);
   }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('1730:theme', theme);
+  }, [theme]);
   useEffect(() => {
     const close = (event: MouseEvent) => { if (!phoneRef.current?.contains(event.target as Node)) phonesOpen.close(); };
     addEventListener('click', close); return () => removeEventListener('click', close);
@@ -70,7 +75,7 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
               {links.map(([to, label]) => <NavLink key={to} to={to} onClick={closeMenu}>{label}<Icon name="arrow" /></NavLink>)}
               <a href="https://vk.ru/vape1730" target="_blank" rel="noreferrer">Мы ВКонтакте<Icon name="arrow" /></a>
               <a href="https://t.me/+lL9we5w3V9xjMzNi" target="_blank" rel="noreferrer">Telegram<Icon name="arrow" /></a>
-              <div className="header__menu-bottom"><button onClick={() => setCity(city === 'Барнаул' ? 'Новоалтайск' : 'Барнаул')}>Ваш город: {city}</button><button onClick={() => { closeMenu(); onAuth(); }}>Личный кабинет</button></div>
+              <div className="header__menu-bottom"><button onClick={() => setCity(city === 'Барнаул' ? 'Новоалтайск' : 'Барнаул')}>Ваш город: {city}</button><button onClick={() => { closeMenu(); onAuth(); }}>Личный кабинет</button><button className="theme-switch" type="button" role="switch" aria-checked={theme === 'light'} onClick={() => setTheme(value => value === 'dark' ? 'light' : 'dark')}><span>{theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}</span><i aria-hidden="true"><b /></i></button></div>
             </nav>
           </div>}
         </div>
