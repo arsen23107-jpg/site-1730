@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Icon from './Icon';
 import logo from '../assets/brand/logo-1730-small.png';
 import { stores } from '../data/stores';
@@ -15,6 +15,9 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
   const [allPhones, setAllPhones] = useState(false);
   const [city, setCity] = useState('Барнаул');
   const phoneRef = useRef<HTMLDivElement>(null);
+  const phoneCloseTimer = useRef<number | null>(null);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const update = () => setScrolled(scrollY > 24);
@@ -29,11 +32,33 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
   const cityStores = stores.filter(store => store.city === city);
   const visiblePhones = allPhones ? cityStores : cityStores.slice(0, 4);
   const closeMenu = () => setMenu(false);
+  const openPhones = () => {
+    if (phoneCloseTimer.current) window.clearTimeout(phoneCloseTimer.current);
+    setPhonesOpen(true);
+  };
+  const schedulePhonesClose = () => {
+    phoneCloseTimer.current = window.setTimeout(() => setPhonesOpen(false), 240);
+  };
+  const goBack = () => {
+    if (window.history.length > 1) navigate(-1);
+    else navigate('/');
+  };
 
   return <>
     <header className={'header' + (scrolled ? ' header--scrolled' : '') + (menu ? ' header--menu' : '')}>
       <div className="container header__in">
-        <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
+        <div className="header__menu-wrap" onMouseEnter={() => setMenu(true)} onMouseLeave={() => setMenu(false)}>
+          {pathname !== '/' && <button className="header__back iconbtn" aria-label="Назад" onClick={goBack}><Icon name="arrow" /></button>}
+          <button className="header__menu iconbtn" aria-label={menu ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menu} onClick={() => setMenu(value => !value)}><Icon name={menu ? 'x' : 'menu'} /></button>
+          <div className="header__side-menu" aria-hidden={!menu}>
+            <nav className="container" aria-label="Меню сайта">
+              {links.map(([to, label]) => <NavLink key={to} to={to} onClick={closeMenu}>{label}<Icon name="arrow" /></NavLink>)}
+              <a href="https://vk.ru/vape1730" target="_blank" rel="noreferrer">Мы ВКонтакте<Icon name="arrow" /></a>
+              <a href="https://t.me/+lL9we5w3V9xjMzNi" target="_blank" rel="noreferrer">Telegram<Icon name="arrow" /></a>
+              <div className="header__menu-bottom"><button onClick={() => setCity(city === 'Барнаул' ? 'Новоалтайск' : 'Барнаул')}>Ваш город: {city}</button><button onClick={onAuth}>Личный кабинет</button></div>
+            </nav>
+          </div>
+        </div>
         <Link to="/" className="brand-logo" aria-label="1730 — на главную"><img src={logo} alt="1730" width={2172} height={724} /></Link>
         <div className="header__desktop-search">
           <button className="header__city" onClick={() => setCityOpen(value => !value)}>{city} <Icon name="chevron" size={13} /></button>
@@ -41,7 +66,7 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
           <button className="header__search-field" onClick={onSearch}>Поиск по каталогу <Icon name="search" size={19} /></button>
         </div>
         <div className="header__act">
-          <div className="header__phones" ref={phoneRef} onMouseEnter={() => setPhonesOpen(true)} onMouseLeave={() => setPhonesOpen(false)}>
+          <div className="header__phones" ref={phoneRef} onMouseEnter={openPhones} onMouseLeave={schedulePhonesClose}>
             <button className="header__phone" onClick={() => setPhonesOpen(value => !value)}><Icon name="phone" size={15} /> +7 (999) 323-60-70 <Icon name="chevron" size={12} /></button>
             {phonesOpen && <div className="header__phone-menu">{visiblePhones.map(store => <a key={store.id} href={'tel:' + store.phone.replace(/[^+\d]/g, '')}><b>{store.phone}</b><span>{store.address}</span></a>)}{cityStores.length > 4 && <button onClick={() => setAllPhones(value => !value)}>{allPhones ? 'Свернуть' : 'Развернуть все'}</button>}</div>}
           </div>
@@ -53,14 +78,6 @@ export default function Header({ onSearch, onAuth }: { onSearch: () => void; onA
           <button className="iconbtn" aria-label="Поиск" onClick={onSearch}><Icon name="search" /></button>
           <button className="iconbtn" aria-label="Личный кабинет" onClick={onAuth}><Icon name="user" /></button>
         </div>
-      </div>
-      <div className="header__side-menu" aria-hidden={!menu}>
-        <nav className="container" aria-label="Меню сайта">
-          {links.map(([to, label]) => <NavLink key={to} to={to} onClick={closeMenu}>{label}<Icon name="arrow" /></NavLink>)}
-          <a href="https://vk.ru/vape1730" target="_blank" rel="noreferrer">Мы ВКонтакте<Icon name="arrow" /></a>
-          <a href="https://t.me/+lL9we5w3V9xjMzNi" target="_blank" rel="noreferrer">Telegram<Icon name="arrow" /></a>
-          <div className="header__menu-bottom"><button onClick={() => setCity(city === 'Барнаул' ? 'Новоалтайск' : 'Барнаул')}>Ваш город: {city}</button><button onClick={onAuth}>Личный кабинет</button></div>
-        </nav>
       </div>
     </header>
     {phoneSheet && <section className="phone-sheet" role="dialog" aria-modal="true" aria-label="Телефоны магазинов">
